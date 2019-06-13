@@ -7,8 +7,7 @@ class Coup:
         self.num_players = num_players
         self.num_cards = 15
         # Ambassador ID is 0, and the three Ambassador cards are further divided into 0a, 0b, and 0c, and so forth for the other cards.
-        self.deck = ['1a', '1b', '1c', '2a', '2b', '2c', '3a', '3b', '3c', '4a', '4b', '4c', '5a', '5b', '5c']
-        self.card_names = ['Ambassador', 'Assassin', 'Captain', 'Contessa', 'Duke']
+        self.deck = ['Ambassador', 'Ambassador', 'Ambassador', 'Assassin', 'Assassin', 'Assassin', 'Captain', 'Captain', 'Captain', 'Contessa', 'Contessa', 'Contessa', 'Duke', 'Duke', 'Duke']
 
         self.players = []
 
@@ -37,6 +36,6 @@ class Coup:
     def distribute_cards(self):
         self.shuffle_deck()
         for i in range(len(self.players)):
-            self.players[i].take_cards(self.deck, 2)
+            self.deck = self.players[i].take_cards(self.deck, 2)
     # end of method distribute_cards()
 

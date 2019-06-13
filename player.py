@@ -3,8 +3,11 @@ class Player:
         self.turn_number = turn_number
         self.cards = []
 
-    def take_cards(self, deck):
-        for i in deck[:]:
+    def take_cards(self, deck, num_cards):
+        deck_copy = deck
+        for i in range(num_cards):
             self.cards.append(deck[i])
-            deck.remove(i)
+            deck_copy = deck[i+1:len(deck)]
+
+        return deck_copy
 
