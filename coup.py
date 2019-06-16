@@ -1,6 +1,4 @@
 from player import Player
-import random
-
 
 class Coup:
     def __init__(self, num_players):
@@ -32,3 +30,4 @@ class Coup:
             self.game_deck = self.players[i].take_cards(self.game_deck, 2)
             self.players[i].initialize_deck()
     # end of method distribute_cards()
+
