@@ -1,12 +1,12 @@
 from cards import Card
-
+import random
 
 class Player:
-    def __init__(self, turn_number):
-        self.turn_number = turn_number
+    def __init__(self):
         self.cards = []
         self.deck = []
         self.coins = 2
+        self.actions = []
 
     # start of method take_cards()
     def take_cards(self, deck, num_cards):
@@ -23,3 +23,9 @@ class Player:
     def initialize_deck(self):
         for i in range(len(self.cards)):
             self.deck.append(Card(self.cards[i]))
+        for i in range(len(self.deck)):
+            self.actions.append(self.deck[i].actions)
+
+    def make_action(self):
+        action_index = random.randint(0, len(self.actions))
+        return self.actions[action_index]

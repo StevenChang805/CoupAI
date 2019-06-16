@@ -14,7 +14,7 @@ class Coup:
 
         # initializes players
         for i in range(num_players):
-            self.players.append(Player(i))
+            self.players.append(Player())
 
     # start of method shuffle_deck()
     def shuffle_deck(self):
@@ -30,4 +30,11 @@ class Coup:
             self.game_deck = self.players[i].take_cards(self.game_deck, 2)
             self.players[i].initialize_deck()
     # end of method distribute_cards()
+
+    ##
+    # TODO: Function to decode the action a player makes
+    # TODO: Function to remove a player's card when couped
+    # TODO: Function to force player to coup when has more than 10 coins
+    # TODO: Function to start a game and end when total number of player reaches one
+
 
