@@ -1,8 +1,10 @@
 from cards import Card
 import random
+from collections import Counter
 
 class Player:
     def __init__(self, player_id):
+        self.player_id = player_id
         self.cards = []
         self.deck = []
         self.coins = 2
@@ -16,7 +18,6 @@ class Player:
             deck_copy = deck[i + 1:len(deck)]
 
         return deck_copy
-
     # end of method take_cards()
 
     # start of method initialize_deck()
@@ -27,6 +28,7 @@ class Player:
         for i in range(len(self.deck)):
             for j in range(len(self.deck[i].actions)):
                 self.actions.append(self.deck[i].actions[j])
+        self.remove_duplicate_actions()
 
     def make_action(self):
         card_index = random.randint(0, len(self.actions)-1)
@@ -38,3 +40,13 @@ class Player:
             returned_cards.append(self.deck[random.randint(len(self.deck))])
             self.deck.remove(self.deck.index(returned_cards[i]))
         return returned_cards
+
+    # start of method remove_duplicate_actions()
+    def remove_duplicate_actions(self):
+        actions_copy = self.actions
+        for i in range(len(self.actions)-1):
+            action_dict = dict(Counter(self.actions))
+            if action_dict.get(self.actions[i]) > 1:
+                actions_copy.remove(self.actions[i])
+        self.actions = actions_copy
+    # end of method remove_duplicate_actions()
