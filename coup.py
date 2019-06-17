@@ -83,5 +83,12 @@ class Coup:
     # TODO: Function to remove a player's card when couped
     # TODO: Function to force player to coup when has more than 10 coins
     # TODO: Function to start a game and end when total number of player reaches one
+    # TODO: Function to refresh players
 
-
+    def refresh_game(self):
+        players_copy = self.players
+        for i in range(len(self.players)):
+            if len(self.players[i].deck) == 0:
+                players_copy.remove(self.players[i])
+                self.player_ids.remove(i)
+        self.players = players_copy
