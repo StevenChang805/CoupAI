@@ -14,7 +14,7 @@ class Coup:
 
         # initializes players
         for i in range(num_players):
-            self.players.append(Player())
+            self.players.append(Player(i))
 
     # start of method shuffle_deck()
     def shuffle_deck(self):
@@ -33,6 +33,51 @@ class Coup:
 
     ##
     # TODO: Function to decode the action a player makes
+
+    def interpret_action(self, player_id, action_name):
+        if action_name == 'income':
+            self.players[player_id].coins += 1
+        if action_name == 'foreign_aid':
+            self.players[player_id].coins += 2
+        if action_name == 'coup':
+            if self.players[player_id].coins < 7:
+                print('Action failed. Player', player_id, 'does not have sufficient coins.')
+            else:
+                self.players[player_id].coins -= 7
+                # TODO: figure out how to make them coup someone
+                # see action.name == 'assassinate' for more details
+        if action_name == 'exchange':
+            self.players[player_id].cards.append(self.game_deck[0], self.game_deck[1])
+            self.players[player_id].initialize_deck()
+            returned_cards = self.players[player_id].return_cards(2)
+            self.game_deck.append(returned_cards[0])
+            self.game_deck.append(returned_cards[1])
+        if action_name == 'assassinate':
+            if self.players[player_id].coins < 3:
+                print('Action failed. Player', player_id, 'does not have sufficient coins.')
+            else:
+                self.players[player_id].coins -= 3
+                # TODO: figure out how to make them assassinate someone
+                # maybe define a function in the player file that takes a parameter player_ids (list) and randomly
+                # selects one?
+        if action_name == 'steal':
+            self.players[player_id].coins += 2
+            # TODO: figure out how to make them steal from SOMEONE
+            # see 'assassinate' for more details (have to make a general function that can be applied to coup & steal)
+        if action_name == 'tax':
+            self.players[player_id].coins += 3
+        if action_name == 'block_steal':
+            work_in_progress = True
+            # TODO: have to make two different 'types' of actions: inflicted upon someone and not inflicted upon someone
+            # create a function retaliate() which can return 'block_steal' if in player's list of actions
+            # if the function doesn't return anything the action goes through
+        if action_name == 'block_assassinate':
+            work_in_progress = True
+            # see action_name == 'block_steal' for more details
+        if action_name == 'block_foreign_aid':
+            work_in_progress = True
+            # see action_name == 'block_foreign_aid' for more details
+
     # TODO: Function to remove a player's card when couped
     # TODO: Function to force player to coup when has more than 10 coins
     # TODO: Function to start a game and end when total number of player reaches one

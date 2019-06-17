@@ -2,7 +2,7 @@
 class Card:
     def __init__(self, name):
         self.name = name
-        self.actions = ['income', 'foreign_aid']
+        self.actions = []
         self.assign_actions(name)
 
     # start of method assign()
