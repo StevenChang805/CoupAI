@@ -64,3 +64,7 @@ class Player:
             selected_player_id_index = random.randint(0, len(player_ids))
         return player_ids[selected_player_id_index]
     # end of method select_player()
+
+    def lose_card(self):
+        card_index = random.randint(0, 1)
+        self.deck.remove(self.deck[card_index])

@@ -11,10 +11,12 @@ class Coup:
         self.all_actions = ['income', 'foreign_aid', 'coup', 'exchange', 'assassinate', 'steal', 'tax',
                             'block_steal', 'block_assassinate', 'block_foreign_aid']
         self.players = []
+        self.player_ids = []
 
         # initializes players
         for i in range(num_players):
             self.players.append(Player(i))
+            self.player_ids.append(i)
 
     # start of method shuffle_deck()
     def shuffle_deck(self):
@@ -45,8 +47,8 @@ class Coup:
                 print('Action failed. Player', player_id, 'does not have sufficient coins.')
             else:
                 self.players[player_id].coins -= 7
-                # TODO: figure out how to make them coup someone
-                # see action.name == 'assassinate' for more details
+                couped_player_id = self.players[player_id].select_player(self.player_ids)
+                self.players[couped_player_id].lose_card()
         if action_name == 'exchange':
             self.players[player_id].cards.append(self.game_deck[0], self.game_deck[1])
             self.players[player_id].initialize_deck()
@@ -58,9 +60,8 @@ class Coup:
                 print('Action failed. Player', player_id, 'does not have sufficient coins.')
             else:
                 self.players[player_id].coins -= 3
-                # TODO: figure out how to make them assassinate someone
-                # maybe define a function in the player file that takes a parameter player_ids (list) and randomly
-                # selects one?
+                assassinated_player_id = self.players[player_id].select_player(self.player_ids)
+                self.players[assassinated_player_id].lose_card()
         if action_name == 'steal':
             self.players[player_id].coins += 2
             # TODO: figure out how to make them steal from SOMEONE
