@@ -33,6 +33,8 @@ class Coup:
 
     ##
     # TODO: Function to decode the action a player makes
+
+    # start of function interpret_action()
     def interpret_action(self, player_id, action_name):
         if action_name == 'income':
             self.players[player_id].coins += 1
